@@ -1,5 +1,6 @@
 pipeline {
     agent { label 'JDK' }
+    triggers { pollSCM('* * * * *') }
     stages {
         stage('vcs') {
             steps {
@@ -14,7 +15,7 @@ pipeline {
         }
         stage('test') {
             steps {
-                sh 'dotnet build ./MusicStoreTest/MusicStoreTest.csproj'
+                sh 'dotnet test ./MusicStoreTest/MusicStoreTest.csproj'
             }
 
         }
